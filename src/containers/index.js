@@ -5,12 +5,13 @@ import 'ress/dist/ress.min.css';
 
 // import relative path
 import Home from './Home';
+import About from './About';
 import NotFound from './NotFound';
 
 const Main = () => (
   <Router>
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route path="/" component={Home} />
       <Route component={NotFound} />
     </Switch>
   </Router>
