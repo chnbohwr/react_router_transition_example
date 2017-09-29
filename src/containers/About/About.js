@@ -12,8 +12,9 @@ export default class About extends Component {
     pageIn: false
   }
   componentDidMount() {
-
-    this.setState({ pageIn: true });
+    setTimeout(() => {
+      this.setState({ pageIn: true });
+    }, 0);
   }
   goHome = () => {
     this.setState({ pageIn: false });
