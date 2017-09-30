@@ -1,33 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { observer, inject } from 'mobx-react';
 import classnames from 'classnames';
-import { Route, Link } from 'react-router-dom';
+import { AnimatedRoute } from 'react-router-transition';
 import About from '../About/';
 import './Home.less';
 
-
-@inject('pageService') @observer
 export default class Home extends Component {
   static propTypes = {
     history: PropTypes.object,
-    pageService: PropTypes.object,
+    match: PropTypes.object,
   }
   goHome = () => {
-    this.props.pageService.pageIn = false;
-    setTimeout(() => {
-      this.props.history.push('/');
-    }, 500);
+    this.props.history.push('/');
   }
   goAbout = () => {
     this.props.history.push('/about');
-    setTimeout(() => {
-      this.props.pageService.pageIn = true;
-    }, 100);
   }
   render() {
-    const { pageIn } = this.props.pageService;
-    const headerClass = classnames('header', { pageIn });
+    const { isExact } = this.props.match;
+    const headerClass = classnames('header', { pageIn: !isExact });
     return (
       <div id="pageHome">
         <div className={headerClass}>
@@ -45,7 +36,16 @@ export default class Home extends Component {
           <div>this is big page mmew3</div>
           <button onClick={this.goAbout}>go to about page</button>
         </div>
-        <Route path="/about" component={About} />
+        <AnimatedRoute
+          className="aboutRouter"
+          atEnter={{ offset: 100 }}
+          atLeave={{ offset: 100 }}
+          atActive={{ offset: 0 }}
+          mapStyles={styles => ({
+            transform: `translateX(${styles.offset}%)`,
+          })}
+          path="/about"
+          component={About} />
       </div>
     );
   }

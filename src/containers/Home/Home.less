@@ -1,3 +1,4 @@
+@slideWidth: calc(~"100% - 60px");
 #pageHome {
   background-color: #ccc;
   width: 100%;
@@ -15,6 +16,20 @@
       opacity: 1;
     }
   }
+  button {
+    border: 1px dashed yellow;
+  }
+  .aboutRouter {
+    transition: all 1s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 60px;
+    width: @slideWidth;
+    &>div {
+      position: absolute;
+      width: 100%;
+    }
+  }
 }
 
 .bigPage {
@@ -24,8 +39,4 @@
   align-items: center;
   font-size: 30px;
   justify-content: center;
-}
-
-button{
-  border: 1px dashed yellow;
 }
